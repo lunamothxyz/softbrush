@@ -44,6 +44,18 @@ impl DbgMenu {
         let text = self.assemble_string();
         print(x, y, font, dest, &text);
     }
+
+    pub fn cursor_up(&mut self) {
+        if self.cursor_index > 0 {
+            self.cursor_index -= 1;
+        }
+    }
+
+    pub fn cursor_down(&mut self) {
+        if self.cursor_index < self.menu_items.len() - 1 {
+            self.cursor_index += 1;
+        }
+    }
 }
 
 pub struct DbgMenuBuilder {
