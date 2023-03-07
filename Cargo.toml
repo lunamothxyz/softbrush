@@ -1,0 +1,19 @@
+[package]
+name = "soft2d"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+image = "0.24.5"
+png = "0.17.7"
+softbuffer = "0.2.0"
+winit = "0.28.2"
+softbrush = { path = "crates/softbrush" }
+num-integer = "0.1.45"
+windows = { version = "0.44.0", features = ["Win32_UI_WindowsAndMessaging", "Win32_Foundation"] }
+hashbrown = "0.13.2"
+
+[profile.dev]
+opt-level = 1
