@@ -1,10 +1,11 @@
 use crate::font::print;
 use crate::font::Font;
 use crate::BitmapARGB32;
-use alloc::boxed::Box;
 use alloc::string::String;
-use alloc::vec::Vec;
 use alloc::string::ToString;
+use alloc::vec::Vec;
+
+type Callback = fn();
 
 /// A simple UI for debugging purposes
 pub struct DbgMenu {
@@ -15,7 +16,7 @@ pub struct DbgMenu {
 
 pub struct DbgMenuItem {
     pub text: String,
-    pub callback: Box<dyn Fn(&mut DbgMenu)>,
+    pub callback: Callback,
 }
 
 impl DbgMenu {
@@ -56,6 +57,12 @@ impl DbgMenu {
             self.cursor_index += 1;
         }
     }
+
+    /// Executes the callback of the currently selected menu item
+    pub fn select(&mut self) {
+        let selected_item = &self.menu_items[self.cursor_index];
+        (selected_item.callback)();
+    }
 }
 
 pub struct DbgMenuBuilder {
@@ -83,10 +90,10 @@ impl DbgMenuBuilder {
         self
     }
 
-    pub fn add_item(mut self, text: &str, callback: impl Fn(&mut DbgMenu) + 'static) -> Self {
+    pub fn add_item(mut self, text: &'static str, callback: Callback) -> Self {
         self.menu_items.push(DbgMenuItem {
             text: text.to_string(),
-            callback: Box::new(callback),
+            callback: callback, 
         });
         self
     }
