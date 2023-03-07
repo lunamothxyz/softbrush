@@ -1,7 +1,10 @@
 [package]
 name = "softbrush"
+description = "A 2D software renderer"
 version = "0.1.0"
 edition = "2021"
+license = "0BSD"
+repository = "https://github.com/lunamothxyz/softbrush"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
